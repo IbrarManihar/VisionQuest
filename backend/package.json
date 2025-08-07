@@ -1,5 +1,5 @@
 {
-  "name": "sms-backend",
+  "name": "backend",
   "version": "1.0.0",
   "description": "Backend for Student Management System",
   "main": "server.js",
@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node --watch server.js",
-    "migrate": "node scripts/migrateToCloudinary.js"
+    "migrate": "node scripts/migrateToCloudinary.js",
+    "build": "echo 'No build step required for Node.js'"
+   
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

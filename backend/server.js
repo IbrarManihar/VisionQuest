@@ -20,28 +20,85 @@ import cloudinary from 'cloudinary';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Update CORS for production
+const productionCorsOptions = {
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'https://your-frontend-domain.vercel.app', // Replace with your actual frontend domain
+      'http://localhost:5173', 
+      'http://localhost:3000',
+      'http://127.0.0.1:5173'
+    ];
+    
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
 
-app.use(cors(corsOptions));
+app.use(cors(process.env.NODE_ENV === 'production' ? productionCorsOptions : corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.MONGODB_URI)
+// MongoDB connection with better error handling for production
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
-
-import routes from './routes/index.js';
-
-
-cloudinary.config({
+// Cloudinary configuration
+cloudinary.v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-app.use('/api', routes);
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api', orderRoutes);
+app.use('/api', bookRoutes);
+app.use('/api', paymentRoutes);
+app.use('/api', userRoutes);
+app.use('/api', eventRoutes);
+app.use('/api', scheduleRoutes);
+app.use('/api', studyMaterialRoutes);
+app.use('/api/upload', uploadRoutes);
 
+// Health check route
+app.get('/api/health', async (req, res) => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      return res.status(200).json({ 
+        status: 'ok',
+        mongodb: 'connected',
+        environment: process.env.NODE_ENV || 'development',
+        timestamp: new Date()
+      });
+    } else {
+      return res.status(500).json({ 
+        status: 'error', 
+        mongodb: 'disconnected', 
+        readyState: mongoose.connection.readyState 
+      });
+    }
+  } catch (error) {
+    console.error('Health check error:', error);
+    return res.status(500).json({ status: 'error', message: error.message });
+  }
+});
 
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
   const statusCode = err.statusCode || 500;
@@ -53,7 +110,6 @@ app.use((err, req, res, next) => {
 
 app.use((err, req, res, next) => {
   if (err instanceof multer.MulterError) {
-
     if (err.code === 'LIMIT_FILE_SIZE') {
       return res.status(400).json({ 
         message: 'File too large. Maximum size is 5MB.' 
@@ -63,7 +119,6 @@ app.use((err, req, res, next) => {
       message: `Upload error: ${err.message}` 
     });
   } else if (err) {
-
     console.error('Server error:', err);
     return res.status(500).json({ 
       message: err.message || 'Something went wrong with the upload!' 
@@ -76,25 +131,18 @@ app.use('*', (req, res) => {
   res.status(404).json({ message: 'API endpoint not found' });
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ message: 'Something went wrong!' });
-});
-
-app.listen(PORT, async () => {
-  console.log(`Server running on port ${PORT}`);
-
-  await verifyRazorpayCredentials();
-
-  const cloudinaryStatus = await verifyCloudinaryConfig();
-  if (!cloudinaryStatus.success) {
-    console.error('⚠️ WARNING: Cloudinary is not properly configured!');
-    console.error('⚠️ Image uploads will not work correctly.');
-    console.error(`⚠️ ${cloudinaryStatus.message}`);
-  } else {
-    console.log('✅ Cloudinary configured successfully.');
-  }
-});
+// For Vercel, we export the app instead of listening
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, async () => {
+    console.log(`Server running on port ${PORT}`);
+    await verifyRazorpayCredentials();
+    const cloudinaryStatus = await verifyCloudinaryConfig();
+    if (!cloudinaryStatus.success) {
+      console.error('⚠️ WARNING: Cloudinary is not properly configured!');
+    } else {
+      console.log('✅ Cloudinary configured successfully.');
+    }
+  });
+}
 
 export default app;
-   
