@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: #ffffff;
+}
+
+body {
+  background: linear-gradient(135deg, #1c1e2d, #151938, #1c1e2d);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Add a subtle overlay pattern */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(106, 17, 203, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(106, 17, 203, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+}
+
+#particles-js {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: -1;
+}
+
+/* Fix container scrolling */
+.container {
+  height: auto;
+  overflow-y: visible;
+}
+
+/* Add glow effect to highlight important areas */
+.glow-effect {
+  box-shadow: 0 0 15px rgba(106, 17, 203, 0.3);
+}

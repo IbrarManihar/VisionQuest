@@ -1,0 +1,10 @@
+/* Add a note style for the admin-only message */
+.admin-only-note {
+  background: rgba(255, 152, 0, 0.1);
+  border-left: 3px solid #FF9800;
+  padding: 12px 15px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  font-style: italic;
+  border-radius: 5px;
+}

@@ -1,0 +1,114 @@
+
+
+.main-container {
+  display: flex;
+  justify-content: center;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+.lend-container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lend-container h1 {
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.lend-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.lend-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.lend-form input,
+.lend-form select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  font-size: 1em;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.lend-form select {
+  appearance: none;
+  background-position: right 10px center;
+  background-size: 16px 16px;
+}
+
+.lend-form select option {
+  background: #333;
+  color: #fff;
+}
+
+.lend-form input:focus,
+.lend-form select:focus {
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+  transform: scale(1.05);
+}
+
+.submit-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.message {
+  margin-top: 20px;
+  font-size: 1.2em;
+  color: #fff;
+}

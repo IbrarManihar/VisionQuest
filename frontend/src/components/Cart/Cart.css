@@ -1,0 +1,262 @@
+/* This file can be safely deleted as it's no longer needed */
+
+.cart-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  color: white;
+}
+
+.cart-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cart-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  font-size: 1.2rem;
+  color: #ddd;
+}
+
+.empty-cart {
+  text-align: center;
+  padding: 50px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.empty-cart h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.empty-cart p {
+  font-size: 1.1rem;
+  color: #ddd;
+  margin-bottom: 30px;
+}
+
+.browse-books-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.browse-books-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.cart-items {
+  margin-bottom: 30px;
+}
+
+.cart-item {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.cart-item:hover {
+  transform: translateY(-5px);
+}
+
+.item-image {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.item-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-details h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.item-details p {
+  margin: 5px 0;
+  color: #ddd;
+}
+
+.item-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4CAF50 !important;
+}
+
+.remove-button {
+  align-self: center;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-button:hover {
+  background-color: #d32f2f;
+}
+
+.cart-summary {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.clear-cart-button {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-cart-button:hover {
+  background-color: #616161;
+}
+
+.checkout-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.checkout-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
+
+.checkout-form-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.checkout-form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.checkout-form .form-group {
+  margin-bottom: 20px;
+}
+
+.checkout-form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.checkout-form select,
+.checkout-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 1rem;
+}
+
+.checkout-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.checkout-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.back-button {
+  background-color: #757575;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #616161;
+}
+
+.place-order-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.place-order-button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}

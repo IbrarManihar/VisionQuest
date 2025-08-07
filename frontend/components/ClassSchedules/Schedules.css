@@ -1,0 +1,66 @@
+.schedules-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+ 
+  color: #fff; /* White text */
+}
+
+.branch-section {
+  margin-bottom: 40px;
+}
+
+.branch-section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: #fff; /* White text */
+}
+
+.schedule-list {
+  display: flex;
+  gap: 20px; 
+}
+
+.schedule-item {
+  animation: slideIn 0.5s ease-in-out;
+  border: 1px solid #555; /* Dark border */
+  padding: 10px; /* Reduced padding */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* Light shadow */
+  background-color: #222; /* Dark background */
+  color: #fff; /* White text */
+  flex: 1 1 calc(33.333% - 20px); /* Adjust the width of the items */
+  box-sizing: border-box;
+}
+
+.schedule-item h3 {
+  font-size: 1.2em; /* Reduced font size */
+  margin-bottom: 5px; /* Reduced margin */
+  color: #fff; /* White text */
+}
+
+.schedule-item a.download-button {
+  display: inline-block;
+  margin-top: 5px; /* Reduced margin */
+  padding: 5px 10px; /* Reduced padding */
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.schedule-item a.download-button:hover {
+  background-color: #45a049;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
