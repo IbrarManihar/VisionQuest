@@ -75,6 +75,26 @@ app.use('/api', scheduleRoutes);
 app.use('/api', studyMaterialRoutes);
 app.use('/api/upload', uploadRoutes);
 
+// Add a root route for health check
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Student Management System API is running',
+    status: 'ok',
+    timestamp: new Date(),
+    endpoints: [
+      '/api/auth',
+      '/api/orders',
+      '/api/books',
+      '/api/payments',
+      '/api/users',
+      '/api/events',
+      '/api/schedules',
+      '/api/study-materials',
+      '/api/upload'
+    ]
+  });
+});
+
 // Health check route
 app.get('/api/health', async (req, res) => {
   try {
@@ -127,8 +147,23 @@ app.use((err, req, res, next) => {
   next();
 });
 
+// Update the catch-all route to be more informative
 app.use('*', (req, res) => {
-  res.status(404).json({ message: 'API endpoint not found' });
+  console.log(`404 - Route not found: ${req.method} ${req.originalUrl}`);
+  res.status(404).json({ 
+    message: 'API endpoint not found',
+    method: req.method,
+    url: req.originalUrl,
+    availableEndpoints: [
+      'GET /',
+      'GET /api/health',
+      'POST /api/auth/login',
+      'POST /api/auth/register',
+      'GET /api/books',
+      'GET /api/orders/my',
+      'POST /api/payments/razorpay/create-order'
+    ]
+  });
 });
 
 // For Vercel, we export the app instead of listening

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE_URL from '../../config/api.js';
 import './RazorpayPayment.css';
 
 const RazorpayPayment = ({ bookId, amount, onPaymentSuccess, onPaymentError, onCancel }) => {
@@ -39,7 +40,7 @@ const RazorpayPayment = ({ bookId, amount, onPaymentSuccess, onPaymentError, onC
         
      
         console.log('Creating Razorpay order...');
-        const response = await fetch('/api/payments/razorpay/create-order', {
+        const response = await fetch(`${API_BASE_URL}/api/payments/razorpay/create-order`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
