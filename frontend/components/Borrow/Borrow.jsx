@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../../src/context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import RazorpayPayment from '../../src/components/Payment/RazorpayPayment';
+import API_BASE_URL from '../config/api.js'; // Add this import
 
 export const Borrow = () => {
   const { token, user } = useAuth();
@@ -126,7 +127,7 @@ export const Borrow = () => {
       
       console.log('Submitting order:', orderData);
       
-      const response = await fetch('/api/borrow', {
+      const response = await fetch(`${API_BASE_URL}/api/borrow`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

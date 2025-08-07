@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE_URL from '../../config/api.js'; // Add this import
 import './Auth.css';
 
 export const Login = () => {
@@ -16,7 +17,8 @@ export const Login = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/auth/login', {
+      // Use API_BASE_URL here
+      const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,20 +29,14 @@ export const Login = () => {
       const data = await response.json();
       
       if (response.ok) {
-   
         login(data.user, data.token);
-        
         toast.success('Login successful!');
-        
-      
         const redirectPath = sessionStorage.getItem('redirectPath') || '/home';
-        sessionStorage.removeItem('redirectPath'); // Clear it after use
+        sessionStorage.removeItem('redirectPath');
         navigate(redirectPath);
       } else {
-       
         if (data.needsVerification) {
           toast.error('Please verify your email before logging in');
-         
           navigate('/resend-verification');
         } else {
           toast.error(data.message || 'Login failed');

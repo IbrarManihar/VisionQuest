@@ -3,6 +3,7 @@ import './Lend.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuth } from '../../src/context/AuthContext';
+import API_BASE_URL from '../config/api.js'; // Add this import
 
 export const Lend = () => {
   const { token, user } = useAuth();
@@ -43,7 +44,7 @@ export const Lend = () => {
         console.log(pair[0] + ': ' + pair[1]);
       }
       
-      const response = await fetch('/api/lend', {
+      const response = await fetch(`${API_BASE_URL}/api/lend`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

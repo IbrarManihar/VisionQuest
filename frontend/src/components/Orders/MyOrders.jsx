@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useAuth } from '../../context/AuthContext';
 import './MyOrders.css';
 import CancelOrderModal from './CancelOrderModal';
+import API_BASE_URL from '../../config/api.js'; // Add this import
 
 const MyOrders = () => {
   const { token } = useAuth();
@@ -29,7 +30,7 @@ const MyOrders = () => {
         
         console.log('Fetching orders with token:', token ? 'Token exists' : 'No token');
         
-        const response = await fetch('/api/orders/my', {
+        const response = await fetch(`${API_BASE_URL}/api/orders/my`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Cache-Control': 'no-cache' 

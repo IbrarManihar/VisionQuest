@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../../config/api.js'; // Add this import
 import './Auth.css';
 
 export const Signup = () => {
@@ -24,7 +25,8 @@ export const Signup = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/auth/signup', {
+      // Use API_BASE_URL here
+      const response = await fetch(`${API_BASE_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
